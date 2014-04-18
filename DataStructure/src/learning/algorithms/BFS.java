@@ -9,7 +9,7 @@ import learning.datastructure.Graph.*;
 
 /*
  * BFS
- * 	BFS is Iteration, breadth-first, implemented by queue.
+ * 	BFS is Iteration, breadth-first, implemented by using queue.
  * 
  *  cannot use recursive, cannot recall itself.
  *  

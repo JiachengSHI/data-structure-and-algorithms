@@ -4,6 +4,25 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Graph
+ * 	implemented by adjacencylist, which contains Vertices and edges.
+ * 	
+ *  Vertice: color, name, value, ......
+ *  Edge: weight, start Vertice, end Vertice.
+ *  
+ *  
+ *  addVertice(), add Vertice into Graph.
+ *  removeVertice(), remove Vertice and its connected edges from Graph.
+ *  
+ *  addEdge(), add Edge into Graph.
+ *  removeEdge(), remove Edge from Graph.
+ *  
+ *  searchbyname(), search Vertice in Graph by its name.
+ *  search(), search Vertice in Graph by itself.
+ *  
+ *  ***/
+
 public class Graph {
 	public class Vertice {
 		//mark in BFS or DFS.
@@ -99,6 +118,16 @@ public class Graph {
 	public void removeVertice(Vertice v) {
 		List<Vertice> vl = this.search(v);
 		if (vl != null) {
+			//remove all edge contains this vertice in other connected vertices.
+			for (int i=1; i<vl.size(); i++) {
+				if (vl.get(i) != null) {
+					this.search(vl.get(i)).remove(vl.get(0));
+				} else {
+					break;
+				}
+			}
+
+			//remove Vertice and its own edges.
 			List<List<Vertice>> tmp = Arrays.asList(this.adjacencylist);
 			tmp.remove(vl);
 			this.adjacencylist = (List<Vertice>[]) tmp.toArray();
@@ -145,7 +174,7 @@ public class Graph {
 		}
 	}
 	
-	
+	//search method
 	//search certain vertice by name in Graph.
 		public List<Vertice> searchbyname(char s) {
 			if (this.size != 0) {
